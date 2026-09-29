@@ -1,0 +1,11 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "java": true,
+        "mvn validate": true,
+        "mvn clean": true,
+        "mvn test": true,
+        "command": true,
+        "printenv": true
+    },
+    "java.configuration.updateBuildConfiguration": "disabled"
+}

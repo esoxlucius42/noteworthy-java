@@ -1,0 +1,54 @@
+[ {
+  "id" : "8daf47ef-43f5-42df-ad5a-7e66d109733b",
+  "name" : "ToDo's",
+  "notes" : [ {
+    "id" : "a77c6a7e-4cf8-4dc4-bef5-79ae91baa540",
+    "title" : "shopping list",
+    "body" : "banane",
+    "created_at" : "2026-09-29T12:19:57.939827100Z",
+    "updated_at" : "2026-09-29T13:55:18.953030176Z",
+    "status" : "in_progress"
+  } ],
+  "selected" : false,
+  "color" : "blue"
+}, {
+  "id" : "673c55fc-d9cb-46a6-a52e-fd6ee5220c41",
+  "name" : "Tasks",
+  "notes" : [ {
+    "id" : "9d495613-8106-42ac-b1b0-19ced76926f0",
+    "title" : "todo",
+    "body" : "",
+    "created_at" : "2026-09-29T12:25:34.963540803Z",
+    "updated_at" : "2026-09-29T12:25:41.510196240Z",
+    "status" : "todo"
+  }, {
+    "id" : "be3b4198-3fa1-4290-bdd6-66b556662e21",
+    "title" : "in progress",
+    "body" : "",
+    "created_at" : "2026-09-29T12:25:43.989366069Z",
+    "updated_at" : "2026-09-29T13:31:03.815439004Z",
+    "status" : "in_progress"
+  }, {
+    "id" : "baa7797e-5795-4621-b9d1-c691d2db45ac",
+    "title" : "done",
+    "body" : "",
+    "created_at" : "2026-09-29T12:25:52.825891710Z",
+    "updated_at" : "2026-09-29T12:25:58.255991329Z",
+    "status" : "done"
+  }, {
+    "id" : "dac9efe3-c181-4a04-8c3a-f0012114b670",
+    "title" : "cancelled",
+    "body" : "",
+    "created_at" : "2026-09-29T12:25:59.412347551Z",
+    "updated_at" : "2026-09-29T12:26:07.004052204Z",
+    "status" : "cancelled"
+  } ],
+  "selected" : false,
+  "color" : "green"
+}, {
+  "id" : "b8b7ec9e-0be4-4e84-857b-de77e718b8ab",
+  "name" : "Ostalo",
+  "notes" : [ ],
+  "selected" : true,
+  "color" : "red"
+} ]
