@@ -18,6 +18,7 @@ public final class UiPalette {
     public static final Color DONE = new Color(133, 220, 171);
     public static final Color CANCELLED = new Color(255, 143, 151);
     public static final Color WARNING = new Color(245, 196, 119);
+    public static final Color SUCCESS = new Color(76, 175, 80);
 
     private UiPalette() { }
 

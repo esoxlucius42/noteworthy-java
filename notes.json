@@ -9,7 +9,7 @@
     "updated_at" : "2026-09-29T13:55:18.953030176Z",
     "status" : "in_progress"
   } ],
-  "selected" : false,
+  "selected" : true,
   "color" : "blue"
 }, {
   "id" : "673c55fc-d9cb-46a6-a52e-fd6ee5220c41",
@@ -49,7 +49,7 @@
   "id" : "b8b7ec9e-0be4-4e84-857b-de77e718b8ab",
   "name" : "Ostalo",
   "notes" : [ ],
-  "selected" : true,
+  "selected" : false,
   "color" : "red"
 }, {
   "id" : "7d497bed-cefb-4f85-bc75-676f6c9102b6",

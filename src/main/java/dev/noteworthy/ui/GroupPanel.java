@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -28,6 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.text.JTextComponent;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -37,6 +39,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -258,7 +261,12 @@ public final class GroupPanel extends JPanel {
         JPanel listActions = new JPanel(new BorderLayout(8, 0));
         listActions.setOpaque(false);
         JButton add = smallButton("＋  New note", "Create a new note (Ctrl+N)", this::createNote);
+        add.setBackground(UiPalette.SUCCESS);
+        add.setForeground(UiPalette.BACKGROUND);
         JButton delete = smallButton("Delete selected", "Delete selected notes", this::deleteSelectedNotes);
+        delete.setBackground(UiPalette.CANCELLED);
+        delete.setForeground(UiPalette.BACKGROUND);
+        delete.setIcon(new TrashIcon(UiPalette.BACKGROUND));
         listActions.add(add, BorderLayout.CENTER);
         listActions.add(delete, BorderLayout.EAST);
         listSection.add(listActions, BorderLayout.SOUTH);
@@ -571,6 +579,31 @@ public final class GroupPanel extends JPanel {
         WorkspaceFrame.styleButton(button);
         button.addActionListener(event -> action.run());
         return button;
+    }
+
+    private record TrashIcon(Color color) implements Icon {
+        private static final int SIZE = 14;
+
+        @Override public int getIconWidth() { return SIZE; }
+        @Override public int getIconHeight() { return SIZE; }
+
+        @Override
+        public void paintIcon(Component component, Graphics graphics, int x, int y) {
+            Graphics2D g2 = (Graphics2D) graphics.create();
+            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.translate(x, y);
+            g2.setColor(color);
+            g2.setStroke(new BasicStroke(1.4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            g2.drawLine(2, 4, SIZE - 3, 4);
+            g2.drawLine(5, 4, 5, 2);
+            g2.drawLine(SIZE - 6, 4, SIZE - 6, 2);
+            g2.drawLine(5, 2, SIZE - 6, 2);
+            g2.drawRect(3, 5, SIZE - 7, SIZE - 7);
+            g2.drawLine(5, 7, 5, SIZE - 4);
+            g2.drawLine(SIZE / 2, 7, SIZE / 2, SIZE - 4);
+            g2.drawLine(SIZE - 8, 7, SIZE - 8, SIZE - 4);
+            g2.dispose();
+        }
     }
 
     private JLabel sectionLabel(String text) {
