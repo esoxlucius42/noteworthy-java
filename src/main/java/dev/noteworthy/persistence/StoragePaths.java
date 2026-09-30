@@ -26,4 +26,8 @@ public final class StoragePaths {
         }
         return Path.of(System.getProperty("user.dir")).toAbsolutePath().resolve("notes.json");
     }
+
+    public static Path backupDir() {
+        return notesFile().getParent().resolve("backup");
+    }
 }

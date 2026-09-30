@@ -78,6 +78,7 @@ public final class WorkspaceFrame extends JFrame {
                     ((GroupPanel) tabs.getComponentAt(index)).flushPendingEdit();
                 }
                 persist();
+                backupOnExit();
                 dispose();
             }
         });
@@ -455,6 +456,14 @@ public final class WorkspaceFrame extends JFrame {
             saveStatus.setText("●  Saved");
         } catch (IOException exception) {
             showSaveError(exception.getMessage());
+        }
+    }
+
+    private void backupOnExit() {
+        try {
+            store.backupNow();
+        } catch (IOException ignored) {
+            // Exiting must not be blocked by a failed backup attempt.
         }
     }
 

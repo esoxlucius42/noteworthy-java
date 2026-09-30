@@ -22,13 +22,16 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public final class JsonStore {
     private static final DateTimeFormatter BACKUP_TIME = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+    private static final int MAX_BACKUPS = 10;
     private final Path file;
     private final ObjectMapper mapper;
     private boolean recoveryRequired;
@@ -146,6 +149,35 @@ public final class JsonStore {
         writeAtomically(groups);
         recoveryRequired = false;
         return backup;
+    }
+
+    /** Copies notes.json into the backup folder with a timestamped name, keeping only the newest {@value MAX_BACKUPS}. */
+    public void backupNow() throws IOException {
+        if (!Files.exists(file)) {
+            return;
+        }
+        Path backupDir = StoragePaths.backupDir();
+        Files.createDirectories(backupDir);
+        String stamp = LocalDateTime.now().format(BACKUP_TIME);
+        Path backup = backupDir.resolve("notes-" + stamp + ".json");
+        int suffix = 1;
+        while (Files.exists(backup)) {
+            backup = backupDir.resolve("notes-" + stamp + "-" + suffix++ + ".json");
+        }
+        Files.copy(file, backup);
+        pruneOldBackups(backupDir);
+    }
+
+    private void pruneOldBackups(Path backupDir) throws IOException {
+        try (Stream<Path> listing = Files.list(backupDir)) {
+            List<Path> backups = listing
+                    .filter(Files::isRegularFile)
+                    .sorted(Comparator.comparing(path -> path.getFileName().toString()))
+                    .toList();
+            for (int index = 0; index < backups.size() - MAX_BACKUPS; index++) {
+                Files.deleteIfExists(backups.get(index));
+            }
+        }
     }
 
     private Note parseNote(JsonNode node) {
