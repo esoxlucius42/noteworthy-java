@@ -51,4 +51,10 @@
   "notes" : [ ],
   "selected" : true,
   "color" : "red"
+}, {
+  "id" : "7d497bed-cefb-4f85-bc75-676f6c9102b6",
+  "name" : "New Group",
+  "notes" : [ ],
+  "selected" : false,
+  "color" : "blue"
 } ]

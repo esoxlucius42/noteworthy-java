@@ -83,8 +83,37 @@ public final class WorkspaceFrame extends JFrame {
         });
     }
 
+    private static final int MIN_TAB_WIDTH = 80;
+    private static final int ADD_TAB_WIDTH = 40;
+    private static final int TAB_HORIZONTAL_PADDING = 10;
+
     private void installColoredTabUI() {
         tabs.setUI(new BasicTabbedPaneUI() {
+            @Override
+            protected void installDefaults() {
+                super.installDefaults();
+                tabInsets = new java.awt.Insets(tabInsets.top, TAB_HORIZONTAL_PADDING,
+                        tabInsets.bottom, TAB_HORIZONTAL_PADDING);
+            }
+
+            @Override
+            protected int calculateTabWidth(int tabPlacement, int tabIndex, java.awt.FontMetrics metrics) {
+                if (tabIndex >= groups.size()) {
+                    return ADD_TAB_WIDTH;
+                }
+                Font boldFont = tabs.getFont().deriveFont(Font.BOLD);
+                int width = super.calculateTabWidth(tabPlacement, tabIndex, tabs.getFontMetrics(boldFont));
+                return Math.max(MIN_TAB_WIDTH, width);
+            }
+
+            @Override
+            protected void paintText(Graphics graphics, int tabPlacement, Font font, java.awt.FontMetrics metrics,
+                    int tabIndex, String title, java.awt.Rectangle textRect, boolean isSelected) {
+                Font paintFont = isSelected ? font.deriveFont(Font.BOLD) : font;
+                super.paintText(graphics, tabPlacement, paintFont, tabs.getFontMetrics(paintFont),
+                        tabIndex, title, textRect, isSelected);
+            }
+
             @Override
             protected void paintTabBackground(Graphics graphics, int tabPlacement, int tabIndex,
                     int x, int y, int width, int height, boolean selected) {
