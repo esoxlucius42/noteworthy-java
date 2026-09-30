@@ -514,7 +514,7 @@ public final class WorkspaceFrame extends JFrame {
             int halfWidth = (width - 4) / 2;
             graphics.setColor(inactive);
             graphics.fillRect(x, y + 2, halfWidth, HEIGHT - 4);
-            graphics.setColor(active ? UiPalette.ACCENT : new Color(214, 219, 224));
+            graphics.setColor(active ? UiPalette.ACCENT : UiPalette.OFF_WHITE);
             graphics.drawRect(x, y + 2, halfWidth - 1, HEIGHT - 5);
             graphics.setColor(selected);
             graphics.fillRect(x + halfWidth + 4, y + 2, halfWidth, HEIGHT - 4);

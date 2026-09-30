@@ -8,6 +8,13 @@
     "created_at" : "2026-09-29T12:19:57.939827100Z",
     "updated_at" : "2026-09-29T13:55:18.953030176Z",
     "status" : "in_progress"
+  }, {
+    "id" : "0d86a954-47ed-4910-af1a-2eb14ac61ae4",
+    "title" : "very long title to test title color",
+    "body" : "",
+    "created_at" : "2026-09-30T12:41:46.394457080Z",
+    "updated_at" : "2026-09-30T12:42:02.927449097Z",
+    "status" : "todo"
   } ],
   "selected" : true,
   "color" : "blue"

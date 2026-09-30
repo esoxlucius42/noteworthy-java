@@ -262,11 +262,11 @@ public final class GroupPanel extends JPanel {
         listActions.setOpaque(false);
         JButton add = smallButton("＋  New note", "Create a new note (Ctrl+N)", this::createNote);
         add.setBackground(UiPalette.SUCCESS);
-        add.setForeground(UiPalette.BACKGROUND);
+        add.setForeground(UiPalette.OFF_WHITE);
         JButton delete = smallButton("Delete selected", "Delete selected notes", this::deleteSelectedNotes);
-        delete.setBackground(UiPalette.CANCELLED);
-        delete.setForeground(UiPalette.BACKGROUND);
-        delete.setIcon(new TrashIcon(UiPalette.BACKGROUND));
+        delete.setBackground(UiPalette.DANGER);
+        delete.setForeground(UiPalette.OFF_WHITE);
+        delete.setIcon(new TrashIcon(UiPalette.OFF_WHITE));
         listActions.add(add, BorderLayout.CENTER);
         listActions.add(delete, BorderLayout.EAST);
         listSection.add(listActions, BorderLayout.SOUTH);
@@ -310,6 +310,7 @@ public final class GroupPanel extends JPanel {
         titleField.setToolTipText("Note title");
         titleField.getAccessibleContext().setAccessibleName("Note title");
         styleTextInput(titleField);
+        titleField.setForeground(UiPalette.OFF_WHITE);
         titleField.setFont(titleField.getFont().deriveFont(Font.BOLD, 18f));
         titleRow.add(titleField, BorderLayout.CENTER);
         styleCombo(editorStatus);
@@ -731,7 +732,7 @@ public final class GroupPanel extends JPanel {
             setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(selected ? UiPalette.FOCUS : UiPalette.BORDER),
                     BorderFactory.createEmptyBorder(9, 11, 8, 11)));
-            title.setForeground(UiPalette.TEXT);
+            title.setForeground(UiPalette.OFF_WHITE);
             title.setText(truncate(note.displayTitle(), title.getFont(), Math.max(60, list.getWidth() - 155)));
             date.setForeground(UiPalette.MUTED);
             date.setText(DISPLAY_DATE.format(note.createdAt().atZone(ZoneId.systemDefault())));
