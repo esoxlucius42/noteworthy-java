@@ -33,11 +33,17 @@ public final class JsonStore {
     private static final DateTimeFormatter BACKUP_TIME = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
     private static final int MAX_BACKUPS = 10;
     private final Path file;
+    private final Path backupDir;
     private final ObjectMapper mapper;
     private boolean recoveryRequired;
 
     public JsonStore(Path file) {
+        this(file, file.toAbsolutePath().normalize().getParent().resolve("backup"));
+    }
+
+    public JsonStore(Path file, Path backupDir) {
         this.file = file.toAbsolutePath().normalize();
+        this.backupDir = backupDir.toAbsolutePath().normalize();
         this.mapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
             .enable(SerializationFeature.INDENT_OUTPUT)
@@ -156,7 +162,6 @@ public final class JsonStore {
         if (!Files.exists(file)) {
             return;
         }
-        Path backupDir = StoragePaths.backupDir();
         Files.createDirectories(backupDir);
         String stamp = LocalDateTime.now().format(BACKUP_TIME);
         Path backup = backupDir.resolve("notes-" + stamp + ".json");

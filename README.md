@@ -16,11 +16,15 @@ On Windows, run `run.bat` from Explorer or a command prompt. Both scripts expect
 
 The shaded JAR contains its runtime dependencies. When started from source, `notes.json` is stored in the project directory. When started from a packaged JAR, it is stored beside that JAR.
 
+Pass `--notes-file <path>` and/or `--backup-dir <path>` to override the default locations, e.g. `./run.sh --notes-file /data/notes.json --backup-dir /data/backups`.
+
 ## Data and recovery
 
 `notes.json` is a UTF-8 JSON array in group order. Each group contains its stable `id`, `name`, selected marker, color theme ID, and `notes` array. Note timestamps are ISO 8601 instants in UTC; displayed dates use the computer's local time and `dd.MM.yyyy` format. Changes are saved automatically through a temporary file and atomic replacement when supported.
 
 If the file is malformed or contains invalid records, Noteworthy leaves it untouched and offers to recover valid records. Recovery first copies the original to a timestamped `notes.json.backup-*` file. Choosing to open without saving keeps the original protected; changes made in that session cannot be persisted.
+
+On exit, a timestamped copy of `notes.json` is also written to the `backup/` folder (next to `notes.json` by default, or the `--backup-dir` path); only the 10 most recent copies are kept.
 
 ## Workspace controls
 
